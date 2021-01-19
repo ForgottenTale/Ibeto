@@ -1,8 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useFonts,Montserrat_400Regular,Montserrat_700Bold,} from '@expo-google-fonts/montserrat';
+
+
 
 export default function App() {
+
+  let {fontsLoaded,error} = useFonts({
+    regular:Montserrat_400Regular,
+    bold: Montserrat_700Bold
+  });
+
   return (
     <View style={styles.container}>
       <View>
@@ -18,11 +27,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   title:{
-    fontFamily: "Montserrat"
+    fontFamily:"bold",
+    fontSize:24
   },
-  subtitle:{}
+  subtitle:{
+    fontFamily:"regular",
+    fontSize:18
+  }
 });
