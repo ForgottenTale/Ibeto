@@ -1,15 +1,9 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 
-import { TextInput, Button } from 'react-native-paper';
-import { IconButton, Colors } from 'react-native-paper';
+import {  Button } from 'react-native-paper';
 
-const Item = ({ title }) => (
-  <View >
-    <Text >{title}</Text>
-  </View>
-);
 
 export default function DeviceConnect({ navigation }) {
 
@@ -17,22 +11,23 @@ export default function DeviceConnect({ navigation }) {
   const [crops, setCrop] = useState([
     {
       title: "Rice",
-      key:'1',
+      key: '1',
       Devices: [
         { name: "Device 1", ph: '0', nitrate: '0', phoshate: '0', key: '1' }
       ]
     },
     {
       title: "Wheat",
-      key:'2',
+      key: '2',
       Devices: [
         { name: "Device 2", ph: '0', nitrate: '0', phoshate: '0', key: '1' }
       ]
     },
+
   ])
 
   const pressHandler = () => {
-    navigation.navigate('DeviceList')
+    navigation.navigate('DeviceList', crops)
     console.log("pressed")
   }
   const renderItem = ({ item }) => (
@@ -49,15 +44,16 @@ export default function DeviceConnect({ navigation }) {
     <View style={styles.container}>
       <View style={{ width: "90%", height: "100%" }}>
 
-        <Text style={styles.subtitle}>Enter your WiFi credientials</Text>
+        <Text style={styles.subtitle}>Crops</Text>
         <View >
-          <FlatList
-            data={crops}
-            renderItem={renderItem}
-            keyExtractor={item => item.key}
-          />
-
-          <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', }} color="blue" onPress={pressHandler}> Add device </Button>
+        
+            <FlatList
+              data={crops}
+              renderItem={renderItem}
+              keyExtractor={item => item.key}
+            />
+         
+          <Button mode="contained" style={styles.button} color="blue" onPress={pressHandler}> Add a new crop </Button>
 
         </View>
       </View>
@@ -72,6 +68,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: "relative",
     height: "100%"
+
   },
   title: {
     marginTop: 60
@@ -88,8 +85,15 @@ const styles = StyleSheet.create({
   },
   itemName: {
     marginLeft: 20,
+  },
+  button: {
+    width: "100%",
+    height: 60,
+    justifyContent: 'center',
+    // position:"absolute",
+    // top:0,
+    // right:0
   }
-
 
 
 

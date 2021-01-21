@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View,FlatList, TouchableOpacity } from 'react-native';
 
-import { TextInput, Button } from 'react-native-paper';
-import { IconButton, Colors } from 'react-native-paper';
+import { Button } from 'react-native-paper';
+
 
 const Item = ({ title }) => (
   <View >
