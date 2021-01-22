@@ -1,15 +1,9 @@
 
 import React, { useState } from 'react';
 import { StyleSheet, Text, View,FlatList, TouchableOpacity } from 'react-native';
-
 import { Button } from 'react-native-paper';
 
 
-const Item = ({ title }) => (
-  <View >
-    <Text >{title}</Text>
-  </View>
-);
 
 export default function DeviceList({ navigation }) {
 

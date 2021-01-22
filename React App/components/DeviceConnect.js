@@ -8,32 +8,59 @@ import axios from 'axios';
 
 export default function DeviceConnect({ navigation }) {
 
-  const [error, setError] = useState(false);
 
+  const pressNavigate = () => {
+    navigation.navigate('DeviceData')
+    console.log("done")
+  }
   const pressHandler = () => {
-    console.log(ipAddress);
-    var url = "http:/" + ipAddress + ":80";
-    axios.get(url).then((response) => { console.log(response) }).catch(error => {
-      console.error(error)
-      setError(true)
-  });
+
+
+    var url = "http:/" + ipAddress + ":80/data";
+
+    axios.get(url).then(response => {
+      console.log(response.data);
+      setdeviceConnected(true);
+    })
+      .catch(error => {
+        console.error(error)
+        setError(true)
+      });
+
   }
 
+  const [error, setError] = useState(false);
   const [ssid, setSsid] = React.useState('');
   const [wifipass, setWifiPass] = React.useState('');
   const [ipAddress, setipAddress] = React.useState('');
-
+  const [deviceConnected, setdeviceConnected] = useState(false);
 
   if (error) {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../assets/')}>
-          <Button onPress={()=>{setError(false)}} color="blue">Retry</Button>
+        <ImageBackground source={require('../assets/404.jpg')} style={styles.image}>
+
         </ImageBackground>
+        <Button mode="contained" onPress={() => { setError(false) }} color="blue" style={{ marginTop: 60 }}>Retry</Button>
 
       </View>
     )
   }
+
+if (deviceConnected) {
+    return (
+      <View style={styles.container}>
+        <ImageBackground source={require('../assets/Connected.jpg')} style={styles.image}>
+
+        </ImageBackground>
+        <Text style={{marginTop: 20,marginBottom:20}}>Device Added</Text>
+        <Button mode="contained" onPress={pressNavigate} color="blue">Next</Button>
+
+      </View>
+    )
+    // console.log("done");
+  }
+
   else {
 
     return (
@@ -44,7 +71,7 @@ export default function DeviceConnect({ navigation }) {
             {/* <TextInput style={{ marginBottom: 20, width: "100%" }} label="SSID" value={ssid} onChangeText={ssid => setSsid(ssid)} />
            <TextInput style={{ marginBottom: 20, width: "100%" }} label="Wifi Password" value={wifipass} onChangeText={wifipass => setWifiPass(wifipass)} /> */}
             <TextInput style={{ marginBottom: 20, width: "100%" }} label="IP Address" value={ipAddress} onChangeText={ipAddress => setipAddress(ipAddress)} />
-            <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', }} color="blue" onPress={pressHandler}> Connect </Button>
+            <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', }} color="blue" onPress={pressNavigate}> Connect </Button>
 
           </View>
         </View>
@@ -69,7 +96,18 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
 
+  image: {
 
+    // height: "100%",
+    width: "100%",
+    height: 200,
+    resizeMode: "cover",
+    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+
+
+  }
 
 
 });
