@@ -6,19 +6,23 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native
 export default function CropList({ navigation }) {
 
     const data = [
-        { name: "Rice", currentprice: "Rs 50/kg", predictedprice: "Rs 51/kg" ,
+        { name: "Rice",
     data:{
         humidity :"50%",
         ph: 7,
         phoshate : 8,
-        nitrate : 10
+        nitrate : 10,
+        currentprice: "Rs 50/kg", 
+        predictedprice: "Rs 51/kg" ,
     }},
-    { name: "Wheat", currentprice: "Rs 50/kg", predictedprice: "Rs 51/kg" ,
+    { name: "Wheat", 
     data:{
         humidity :"70%",
         ph: 6,
         phoshate : 8,
-        nitrate : 10
+        nitrate : 10,
+        currentprice: "Rs 50/kg", 
+        predictedprice: "Rs 51/kg" ,
     }}
     ]
 
@@ -28,11 +32,11 @@ export default function CropList({ navigation }) {
                 <Text style={styles.itemName}>{item.name}</Text>
                 <View>
                     <Text style={styles.itemName}>Current Price</Text>
-                    <Text style={styles.itemName}>{item.currentprice}</Text>
+                    <Text style={styles.itemName}>{item.data.currentprice}</Text>
                 </View>
                 <View>
                     <Text style={styles.itemName}>Predicted Price</Text>
-                    <Text style={styles.itemName}>{item.predictedprice}</Text>
+                    <Text style={styles.itemName}>{item.data.predictedprice}</Text>
                 </View>
 
             </View>

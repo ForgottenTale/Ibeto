@@ -14,23 +14,37 @@ export default function CropData({ navigation }) {
     const pressHandler = () => {
 
         console.log("pressed")
-        console.log(navigation.getParam('data'))
+        // console.log(navigation.getParam('data'))
 
     }
     const data = navigation.getParam('data');
     const name = navigation.getParam('name');
+
+    
 
     return (
         <View style={styles.container}>
             <View style={{ width: "90%", height: "100%" }}>
             <Text style={styles.subtitle}>{name}</Text>
 
-                <View style={{ width: "100%", justifyContent: "center" }}>
+                <View style={styles.dataContainer}>
+
                     <View style={styles.item}>
                         <Text style={styles.itemName}>Humidity</Text>
                         <Text style={styles.itemName}>{data.humidity}</Text>
 
                     </View>
+                    <View style={styles.item}>
+                        <Text style={styles.itemName}>Current Market Price</Text>
+                        <Text style={styles.itemName}>{data.humidity}</Text>
+
+                    </View>
+                    <View style={styles.item}>
+                        <Text style={styles.itemName}>Predicted Price</Text>
+                        <Text style={styles.itemName}>{data.humidity}</Text>
+
+                    </View>
+                    
 
                     <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', bottom: 0 }} color="blue" onPress={pressHandler}> Select </Button>
 
@@ -56,7 +70,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     item: {
-        width: "50%",
+        width: "45%",
         height: 60,
         backgroundColor: "red",
         marginBottom: 20,
@@ -69,6 +83,13 @@ const styles = StyleSheet.create({
     itemName: {
        
     },
+    dataContainer:{
+        width: "100%", 
+        justifyContent: "space-between",
+        display : "flex",
+        flexDirection:"row",
+        flexWrap: 'wrap',
+    }
     
 
 
