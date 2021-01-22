@@ -36,12 +36,12 @@ export default function CropData({ navigation }) {
                     </View>
                     <View style={styles.item}>
                         <Text style={styles.itemName}>Current Price</Text>
-                        <Text style={styles.itemName}>{data.humidity}</Text>
+                        <Text style={styles.itemName}>{data.currentprice}</Text>
 
                     </View>
                     <View style={styles.item}>
                         <Text style={styles.itemName}>Predicted Price</Text>
-                        <Text style={styles.itemName}>{data.humidity}</Text>
+                        <Text style={styles.itemName}>{data.predictedprice}</Text>
 
                     </View>
                     
