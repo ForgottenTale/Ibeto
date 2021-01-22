@@ -1,18 +1,29 @@
 
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity,ImageBackground } from 'react-native';
-import { Button } from 'react-native-paper';
-import axios from 'axios';
+import React from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 
 
-export default function DeviceData({ navigation }) {
+export default function CropList({ navigation }) {
 
-    const data=[
-        {name :"rice", currentprice :"Rs 50/kg",predictedprice:"Rs 51/kg"},
+    const data = [
+        { name: "Rice", currentprice: "Rs 50/kg", predictedprice: "Rs 51/kg" ,
+    data:{
+        humidity :"50%",
+        ph: 7,
+        phoshate : 8,
+        nitrate : 10
+    }},
+    { name: "Wheat", currentprice: "Rs 50/kg", predictedprice: "Rs 51/kg" ,
+    data:{
+        humidity :"70%",
+        ph: 6,
+        phoshate : 8,
+        nitrate : 10
+    }}
     ]
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => { console.log(item.name); navigation.navigate('CropData', item); }}>
             <View style={styles.item}>
                 <Text style={styles.itemName}>{item.name}</Text>
                 <View>
@@ -30,33 +41,27 @@ export default function DeviceData({ navigation }) {
     )
 
 
-    const pressHandler = () => {
-     ;
-        console.log("pressed")
-       
-    }
- 
-        return (
-            <View style={styles.container}>
-                <View style={{ width: "90%", height: "100%" }}>
+    return (
+        <View style={styles.container}>
+            <View style={{ width: "90%", height: "100%" }}>
 
-                    <Text style={styles.subtitle}>Devices Connected</Text>
-                    <View style={{ width: "100%" }}>
+                <Text style={styles.subtitle}>Select one</Text>
+                <View style={{ width: "100%" }}>
 
                     <FlatList
                         data={data}
                         renderItem={renderItem}
-                        keyExtractor={item => item.key}
+                        keyExtractor={item => item.name}
                     />
 
 
-                        <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', bottom: 0 }} color="blue" onPress={pressHandler}> Select </Button>
 
-                    </View>
+
                 </View>
             </View>
-        );
-    }
+        </View>
+    );
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -66,9 +71,7 @@ const styles = StyleSheet.create({
         position: "relative",
         height: "100%"
     },
-    title: {
-        marginTop: 60
-    },
+
     subtitle: {
         marginTop: 20,
         marginBottom: 20
@@ -90,20 +93,6 @@ const styles = StyleSheet.create({
     itemValue: {
         marginRight: 20,
     },
-    image: {
-
-        // height: "100%",
-        width: "100%",
-        height: 200,
-        resizeMode: "cover",
-        justifyContent: "center",
-        alignItems: 'center',
-        justifyContent: 'center',
-    
-    
-      }
-    
-
 
 
 

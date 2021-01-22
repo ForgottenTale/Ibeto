@@ -6,6 +6,7 @@ import DeviceList from '../components/DeviceList';
 import DeviceData from '../components/DeviceData';
 import CropList from '../components/CropList';
 import Login from '../components/login'
+import CropData from '../components/CropData';
 
 const screens = {
     Dashboard: {
@@ -35,6 +36,12 @@ const screens = {
         screen: CropList,
         navigationOptions: {
             title: "Suggested Crops"
+        }
+    },
+    CropData:{
+        screen: CropData,
+        navigationOptions: {
+            title: "Crop Data"
         }
     }
 
