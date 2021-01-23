@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 
 import {  Button } from 'react-native-paper';
-
+import * as firebase from 'firebase';
 
 export default function DeviceConnect({ navigation }) {
 
@@ -30,6 +30,13 @@ export default function DeviceConnect({ navigation }) {
     navigation.navigate('DeviceList', crops)
     console.log("pressed")
   }
+
+  const signOut=()=>{
+    
+firebase.auth()
+.signOut()
+.then(() => console.log('User signed out!'));
+  }
   const renderItem = ({ item }) => (
     <TouchableOpacity>
       <View style={styles.item}>
@@ -54,6 +61,7 @@ export default function DeviceConnect({ navigation }) {
             />
          
           <Button mode="contained" style={styles.button} color="blue" onPress={pressHandler}> Add a new crop </Button>
+          <Button mode="contained" style={styles.button} color="blue" onPress={signOut}> Sign out </Button>
 
         </View>
       </View>

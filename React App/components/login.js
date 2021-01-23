@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 // import { useFonts, Montserrat_400Regular, Montserrat_700Bold, } from '@expo-google-fonts/montserrat';
 import { TextInput, Button } from 'react-native-paper';
-
+import * as firebase from 'firebase';
 
 
 export default function Login() {
@@ -14,7 +14,24 @@ export default function Login() {
     // });
     const [text, setText] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const pressHandler = () => {
+        firebase.auth()
+            .signInWithEmailAndPassword(text, password)
+            .then(() => {
+                console.log('User account created & signed in!');
+            })
+            .catch(error => {
+                if (error.code === 'auth/email-already-in-use') {
+                    console.log('That email address is already in use!');
+                }
 
+                if (error.code === 'auth/invalid-email') {
+                    console.log('That email address is invalid!');
+                }
+
+                console.error(error);
+            });
+    }
     return (
         <View style={styles.container}>
 
@@ -26,7 +43,7 @@ export default function Login() {
                     <Text style={styles.subtitle}>Login to continue</Text>
                 </ImageBackground>
             </View>
-            
+
             <View style={{ width: "90%" }}>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <TextInput style={{ marginBottom: 20, width: "100%" }} label="Email" value={text} onChangeText={text => setText(text)} />
@@ -37,14 +54,14 @@ export default function Login() {
 
                 <Text style={{ marginBottom: 20, }}>Forgot password ?</Text>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', }} color="blue" onPress={() => console.log('Pressed')}> Sign In </Button>
-                    <Text style={{ marginTop: 60, }}>Don't have an account yet ?</Text>
-                    <Text>Sign Up</Text>
-                </View>
-
-               
+                    <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', }} color="blue" onPress={pressHandler}> Sign In </Button>
+                <Text style={{ marginTop: 60, }}>Don't have an account yet ?</Text>
+                <Text>Sign Up</Text>
             </View>
+
+
         </View>
+        </View >
     );
 }
 
