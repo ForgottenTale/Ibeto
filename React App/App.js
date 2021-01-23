@@ -5,8 +5,7 @@ import Login from './components/login';
 import Routes from './routes/routes';
 import * as firebase from 'firebase';
 import { firebaseConfig } from './config';
-// firebase.initializeApp(firebaseConfig);
-
+import { FoodProvider } from './components/provider/context'
 
 export default function App() {
 
@@ -34,11 +33,20 @@ export default function App() {
 
 
   return (
-    <View style={styles.container}>
+    <FoodProvider>
+      <View style={styles.container}>
 
-      {(login) ? <Routes /> : <Login />}
+        {(login) ?
+          // <FoodProvider>
+          <Routes />
+          // </FoodProvider> 
+          :
 
-    </View>
+          <Login />
+        }
+
+      </View>
+    </FoodProvider>
   );
 }
 

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 // import { useFonts, Montserrat_400Regular, Montserrat_700Bold, } from '@expo-google-fonts/montserrat';
 import { TextInput, Button } from 'react-native-paper';
 import * as firebase from 'firebase';
-
+import { useTheme, useUpdateState } from './provider/context'
 
 export default function Login() {
 
@@ -12,9 +12,12 @@ export default function Login() {
     //   regular: Montserrat_400Regular,
     //   bold: Montserrat_700Bold
     // });
+    const state = useTheme();
     const [text, setText] = React.useState('');
     const [password, setPassword] = React.useState('');
     const pressHandler = () => {
+        //   useUpdateState(text);
+        state.setName(text)
         firebase.auth()
             .signInWithEmailAndPassword(text, password)
             .then(() => {
@@ -33,13 +36,15 @@ export default function Login() {
             });
     }
     return (
+        // <Context.Consumer>
+        //     { food =>
         <View style={styles.container}>
 
 
 
             <View style={styles.textCon}>
                 <ImageBackground source={require("../assets/loginback.jpg")} style={styles.image}>
-                    <Text style={styles.title}>Welcome Back !</Text>
+                    <Text style={styles.title}>Welcome Back {state.name}</Text>
                     <Text style={styles.subtitle}>Login to continue</Text>
                 </ImageBackground>
             </View>
@@ -55,13 +60,15 @@ export default function Login() {
                 <Text style={{ marginBottom: 20, }}>Forgot password ?</Text>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', }} color="blue" onPress={pressHandler}> Sign In </Button>
-                <Text style={{ marginTop: 60, }}>Don't have an account yet ?</Text>
-                <Text>Sign Up</Text>
+                    <Text style={{ marginTop: 60, }}>Don't have an account yet ?</Text>
+                    <Text>Sign Up</Text>
+                </View>
+
+
             </View>
-
-
-        </View>
         </View >
+        // }
+        //         </Context.Consumer>
     );
 }
 
