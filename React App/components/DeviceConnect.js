@@ -41,8 +41,12 @@ export default function DeviceConnect({ navigation }) {
         <ImageBackground source={require('../assets/404.jpg')} style={styles.image}>
 
         </ImageBackground>
-        <Button mode="contained" onPress={() => { setError(false) }} color="blue" style={{ marginTop: 60 }}>Retry</Button>
-
+        
+        <Button
+              mode="contained"
+              style={{ width: "100%", height: 60, justifyContent: 'center', }}
+              labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+              color="#2F4553" onPress={() => { setError(false) }}>Retry</Button>
       </View>
     )
   }
@@ -113,7 +117,6 @@ const styles = StyleSheet.create({
 
   image: {
 
-    // height: "100%",
     width: "100%",
     height: 200,
     resizeMode: "cover",

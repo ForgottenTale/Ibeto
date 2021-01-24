@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Button } from 'react-native-paper';
-import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
+
 
 import { useTheme } from './provider/context';
 
@@ -35,23 +35,28 @@ export default function DeviceList({ navigation }) {
       <View style={{ width: "90%", height: "100%" }}>
 
         <Text style={styles.subtitle}>Devices Connected</Text>
-        
-          <View style={styles.itemContainer}>
-          <ImageBackground source={require('../assets/404.jpg')} style={styles.image}></ImageBackground>
-            <FlatList
-              data={crops}
-              renderItem={renderItem}
-              keyExtractor={item => item.key}
-            />
-            
-            <View>
-              <Button
-                mode="contained"
-                style={{ width: "100%", height: 60, justifyContent: 'center', }}
-                labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-                color="#2F4553" onPress={pressHandler}> Add devices </Button>
-            </View>
+        <View style={styles.itemContainer}>
+          
+          {(device) ? <View style={styles.imageContainer}>
+            <Image source={require('../assets/device.jpg')} style={styles.image} />
+            <Text style={styles.subtitle}>No devices added</Text>
+          </View> : null}
+
+
+          <FlatList
+            data={crops}
+            renderItem={renderItem}
+            keyExtractor={item => item.key}
+          />
+
+          <View>
+            <Button
+              mode="contained"
+              style={{ width: "100%", height: 60, justifyContent: 'center', }}
+              labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+              color="#2F4553" onPress={pressHandler}> Add devices </Button>
           </View>
+        </View>
       </View>
     </View>
   );
@@ -85,20 +90,26 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     height: "85%",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   image: {
 
-    // height: "100%",
-    width: "100%",
-    height: 200,
-    resizeMode: "cover",
+    width: 250,
+    height: 250,
+    marginLeft: "auto",
+    marginRight: "auto",
+    resizeMode: "contain",
     justifyContent: "center",
     alignItems: 'center',
     justifyContent: 'center',
 
 
-}
+  },
+  imageContainer: {
+    width: "100%",
+    alignItems: 'center',
+    justifyContent: "center"
+  }
 
 
 
