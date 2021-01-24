@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity,ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ImageBackground } from 'react-native';
 import { Button } from 'react-native-paper';
 import axios from 'axios';
 
@@ -60,7 +60,11 @@ export default function DeviceData({ navigation }) {
 
 
 
-                        <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', bottom: 0 }} color="blue" onPress={pressHandler}> Search for crops </Button>
+                        <Button
+              mode="contained"
+              style={{ width: "100%", height: 60, justifyContent: 'center', }}
+              labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+              color="#2F4553" onPress={pressHandler}> Search for crops </Button>
 
                     </View>
                 </View>
@@ -110,10 +114,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: 'center',
         justifyContent: 'center',
-    
-    
-      }
-    
+
+
+    }
+
 
 
 

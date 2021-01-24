@@ -78,7 +78,7 @@ export default function Login() {
 
                     <TextInput
                         mode="outlined"
-                        style={{ marginBottom: 20, width: "100%", color: "white", fontFamily: "regular", fontSize: 12 }}
+                        style={{ marginBottom: 20, width: "100%", color: "white", fontFamily: "regular", fontSize: 14 }}
                         label="Email"
                         value={text}
                         onChangeText={text => setText(text)}
@@ -88,7 +88,7 @@ export default function Login() {
 
                     <TextInput
                         mode="outlined"
-                        style={{ marginBottom: 20, width: "100%", color: "white", fontFamily: "regular", fontSize: 12 }}
+                        style={{ marginBottom: 20, width: "100%", color: "white", fontFamily: "regular", fontSize: 14 }}
                         label="Password"
                         value={password}
                         secureTextEntry={true}

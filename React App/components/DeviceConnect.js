@@ -47,14 +47,18 @@ export default function DeviceConnect({ navigation }) {
     )
   }
 
-if (deviceConnected) {
+  if (deviceConnected) {
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../assets/Connected.jpg')} style={styles.image}>
 
         </ImageBackground>
-        <Text style={{marginTop: 20,marginBottom:20}}>Device Added</Text>
-        <Button mode="contained" onPress={pressNavigate} color="blue">Next</Button>
+        <Text style={{ marginTop: 20, marginBottom: 20 }}>Device Added</Text>
+        <Button
+          mode="contained"
+          style={{ width: "100%", height: 60, justifyContent: 'center', }}
+          labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+          color="#2F4553" onPress={pressHandler}> Add devices </Button>
 
       </View>
     )
@@ -70,8 +74,17 @@ if (deviceConnected) {
           <View >
             {/* <TextInput style={{ marginBottom: 20, width: "100%" }} label="SSID" value={ssid} onChangeText={ssid => setSsid(ssid)} />
            <TextInput style={{ marginBottom: 20, width: "100%" }} label="Wifi Password" value={wifipass} onChangeText={wifipass => setWifiPass(wifipass)} /> */}
-            <TextInput style={{ marginBottom: 20, width: "100%" }} label="IP Address" value={ipAddress} onChangeText={ipAddress => setipAddress(ipAddress)} />
-            <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', }} color="blue" onPress={pressNavigate}> Connect </Button>
+            <TextInput style={{ marginBottom: 20, width: "100%" }}
+              label="IP Address"
+              value={ipAddress}
+              onChangeText={ipAddress => setipAddress(ipAddress)} mode="outlined"
+              style={{ marginBottom: 20, width: "100%", color: "white", fontFamily: "regular", fontSize: 14 }} />
+
+            <Button
+              mode="contained"
+              style={{ width: "100%", height: 60, justifyContent: 'center', }}
+              labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+              color="#2F4553" onPress={pressNavigate}> Connect </Button>
 
           </View>
         </View>
@@ -93,7 +106,9 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    fontFamily: "regular",
+    fontSize: 12
   },
 
   image: {

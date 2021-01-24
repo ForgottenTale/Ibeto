@@ -12,11 +12,10 @@ export default function DeviceList({ navigation }) {
 
 
   const pressHandler = () => {
-    navigation.navigate('DeviceConnect')
-    console.log("pressed")
+    navigation.navigate('DeviceConnect');
   }
   const renderItem = ({ item }) => {
-    console.log(item.devices.key)
+
     return (
       <TouchableOpacity>
         <View style={styles.item}>
@@ -40,7 +39,7 @@ export default function DeviceList({ navigation }) {
             keyExtractor={item => item.key}
           />
 
-<Button
+          <Button
             mode="contained"
             style={{ width: "100%", height: 60, justifyContent: 'center', }}
             labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
   subtitle: {
     marginTop: 20,
     marginBottom: 20,
-    color: "#2F4553", 
+    color: "#2F4553",
     fontFamily: "regular",
   },
   item: {
