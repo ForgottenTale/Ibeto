@@ -1,23 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-// import { useFonts, Montserrat_400Regular, Montserrat_700Bold, } from '@expo-google-fonts/montserrat';
+import { useFonts, Montserrat_400Regular, Montserrat_700Bold, } from '@expo-google-fonts/montserrat';
 import { TextInput, Button } from 'react-native-paper';
 import * as firebase from 'firebase';
-import { useTheme, useUpdateState } from './provider/context'
 
 export default function Login() {
 
-    // let { fontsLoaded, error } = useFonts({
-    //   regular: Montserrat_400Regular,
-    //   bold: Montserrat_700Bold
-    // });
-    const state = useTheme();
+    let { fontsLoaded, error } = useFonts({
+        regular: Montserrat_400Regular,
+        bold: Montserrat_700Bold
+    });
+
+
     const [text, setText] = React.useState('');
     const [password, setPassword] = React.useState('');
+
     const pressHandler = () => {
-        //   useUpdateState(text);
-        state.setName(text)
+
         firebase.auth()
             .signInWithEmailAndPassword(text, password)
             .then(() => {
@@ -35,41 +34,70 @@ export default function Login() {
                 console.error(error);
             });
     }
-    return (
-        // <Context.Consumer>
-        //     { food =>
-        <View style={styles.container}>
+    // if(fontsLoaded){
+        return (
 
-
-
-            <View style={styles.textCon}>
-                <ImageBackground source={require("../assets/loginback.jpg")} style={styles.image}>
-                    <Text style={styles.title}>Welcome Back {state.name}</Text>
+            <View style={styles.container}>
+    
+    
+    
+                <View style={styles.textCon}>
+    
+                    <Text style={styles.title}>Welcome Back !</Text>
                     <Text style={styles.subtitle}>Login to continue</Text>
-                </ImageBackground>
-            </View>
-
-            <View style={{ width: "90%" }}>
-                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <TextInput style={{ marginBottom: 20, width: "100%" }} label="Email" value={text} onChangeText={text => setText(text)} />
-                    <TextInput style={{ marginBottom: 20, width: "100%" }} label="Password" value={password} secureTextEntry={true} onChangeText={password => setPassword(password)} />
-
-
+    
                 </View>
-
-                <Text style={{ marginBottom: 20, }}>Forgot password ?</Text>
-                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', }} color="blue" onPress={pressHandler}> Sign In </Button>
-                    <Text style={{ marginTop: 60, }}>Don't have an account yet ?</Text>
-                    <Text>Sign Up</Text>
+    
+                <View style={{ width: "85%" }}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <TextInput 
+                        mode="outlined" 
+                        style={{ marginBottom: 20, width: "100%",color: "white",fontFamily: "regular", fontSize: 12 }} 
+                        label="Email" 
+                        value={text} 
+                        onChangeText={text => setText(text)} 
+                        selectionColor="#2F4553" 
+                        underlineColor="white" 
+                        />
+    
+                        <TextInput 
+                        mode="outlined"
+                        style={{ marginBottom: 20, width: "100%",color: "white",fontFamily: "regular", fontSize: 12  }} 
+                        label="Password" 
+                        value={password} 
+                        secureTextEntry={true} 
+                        onChangeText={password => setPassword(password)} 
+                        selectionColor="#2F4553" 
+                        underlineColor="white" />
+    
+    
+                    </View>
+    
+                    <Text style={{ marginBottom: 20,fontFamily: "regular",fontSize:12 }}>Forgot password ?</Text>
+                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                       
+                        <Button 
+                        mode="contained" 
+                        style={{ width: "100%", height: 60, justifyContent: 'center', }} 
+                        labelStyle={{ color: "white",fontFamily: "bold", fontSize: 12 }} 
+                        color="#2F4553" onPress={pressHandler}> Sign In </Button>
+                    
+    
+                        <Text style={{ marginTop: 40, color: "#2F4553",fontFamily: "regular", fontSize: 12  }}>Don't have an account yet ?</Text>
+                        <Text style={{ color: "#2F4553",fontFamily: "bold", fontSize: 12  }}>Sign Up</Text>
+                    </View>
+    
+    
                 </View>
-
-
-            </View>
-        </View >
-        // }
-        //         </Context.Consumer>
-    );
+            </View >
+    
+        );
+        
+    // }
+    // else{
+    //     return <Text>loading</Text>
+    // }
+  
 }
 
 const styles = StyleSheet.create({
@@ -77,22 +105,27 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
+
     },
     textCon: {
-        height: "50%",
+        height: "35%",
         width: "100%",
+
+        alignItems: 'center',
+        justifyContent: "center"
 
     },
     title: {
-        // fontFamily: "bold",
-        fontSize: 24,
-        color: "white"
+        fontFamily: "bold",
+        fontSize: 20,
+        color: "#2F4553"
 
     },
     subtitle: {
-        // fontFamily: "regular",
-        fontSize: 18,
-        color: "white"
+        fontFamily: "regular",
+        fontSize: 14,
+        color: "#2F4553",
+        opacity: .3
     },
     image: {
         width: "100%",
@@ -103,5 +136,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
 
 
-    }
+    },
+    linearGradient: {
+        width: 60,
+        height: 70
+    },
 });

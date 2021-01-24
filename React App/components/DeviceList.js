@@ -1,30 +1,31 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View,FlatList, TouchableOpacity } from 'react-native';
-import { Button } from 'react-native-paper';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Button } from 'react-native';
+// import { Button } from 'react-native-paper';
 
-
+import { useTheme } from './provider/context'
 
 export default function DeviceList({ navigation }) {
+  const crop = useTheme();
+  const crops = {}
 
 
-  const [crops, setCrop] = useState([
-    { title: "Rice", ph: '0', nitrate: '0', phoshate: '0', key: '1' },
-    { title: "Wheat", ph: '0', nitrate: '0', phoshate: '0', key: '2' },
-   ])
- 
+
   const pressHandler = () => {
     navigation.navigate('DeviceConnect')
     console.log("pressed")
   }
-  const renderItem = ({ item }) => (
-    <TouchableOpacity>
-      <View style={styles.item}>
-        <Text style={styles.itemName}>{item.title}</Text>
-      </View>
+  const renderItem = ({ item }) => {
+    console.log(item.devices.key)
+    return (
+      <TouchableOpacity>
+        <View style={styles.item}>
+          <Text style={styles.itemName}>{item.devices.name}</Text>
+        </View>
 
-    </TouchableOpacity>
-  )
+      </TouchableOpacity>)
+  }
+
 
 
   return (
@@ -62,13 +63,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20
   },
-  item:{
-    height:60,
+  item: {
+    height: 60,
     backgroundColor: "red",
-    marginBottom:20,
+    marginBottom: 20,
     justifyContent: 'center',
   },
-  itemName:{
+  itemName: {
     marginLeft: 20,
   }
 
