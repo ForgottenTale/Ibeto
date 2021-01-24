@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image,ActivityIndicator } from 'react-native';
 import { Button } from 'react-native-paper';
 import axios from 'axios';
 
@@ -12,18 +12,21 @@ export default function DeviceData({ navigation }) {
     const [Ph, setPh] = useState(0);
     const [nitrate, setNitrate] = useState(0);
     const [phosphate, setPhosphate] = useState(0);
+    const [loader, setLoader] = useState(false);
 
     const pressHandler = () => {
-    
+        setLoader(true);
         var url = "http://192.168.31.58:80/data";
 
         axios.get(url).then(response => {
      
             navigation.navigate('CropList');
+            setLoader(false);
         })
             .catch(error => {
                
                 setError(true)
+                setLoader(false);
             });
     }
     if (error) {
@@ -44,6 +47,14 @@ export default function DeviceData({ navigation }) {
             </View>
         )
     }
+    else if (loader) {
+        return (
+          <View style={styles.container}>
+            <ActivityIndicator />
+          </View>
+    
+        )
+      }
     else {
         return (
             <View style={styles.container}>
@@ -86,7 +97,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         position: "relative",
-        height: "100%"
+        height: "100%",
     },
     title: {
         marginTop: 60
