@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Button } from 'react-native';
-// import { Button } from 'react-native-paper';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-paper';
 
 import { useTheme } from './provider/context'
 
@@ -40,7 +40,11 @@ export default function DeviceList({ navigation }) {
             keyExtractor={item => item.key}
           />
 
-          <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', }} color="blue" onPress={pressHandler}> Add device </Button>
+<Button
+            mode="contained"
+            style={{ width: "100%", height: 60, justifyContent: 'center', }}
+            labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+            color="#2F4553" onPress={pressHandler}> Add devices </Button>
 
         </View>
       </View>
@@ -61,7 +65,9 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    color: "#2F4553", 
+    fontFamily: "regular",
   },
   item: {
     height: 60,

@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from '
 import { Button } from 'react-native-paper';
 import * as firebase from 'firebase';
 import { useTheme } from './provider/context'
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function DeviceConnect({ navigation }) {
 
@@ -17,16 +18,21 @@ export default function DeviceConnect({ navigation }) {
 
   const signOut = () => {
     firebase.auth().signOut()
-     
+
   }
 
   const renderItem = ({ item }) => {
 
     return (
       <TouchableOpacity>
-        <View style={styles.item}>
+        <LinearGradient
+          colors={['#EEFAFF', '#F8F8F8']}
+          style={styles.button}>
+
           <Text style={styles.itemName}>{item.title}</Text>
-        </View>
+
+        </LinearGradient>
+
 
       </TouchableOpacity>)
   }
@@ -45,15 +51,19 @@ export default function DeviceConnect({ navigation }) {
             renderItem={renderItem}
             keyExtractor={item => item.key}
           />
-          {/* <TouchableOpacity>
-        <View style={styles.item}>
-          <Text style={styles.itemName}>{crops.title}</Text>
-        </View>
 
-      </TouchableOpacity> */}
+          <Button
+            mode="contained"
+            style={{ width: "100%", height: 60, justifyContent: 'center', }}
+            labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+            color="#2F4553" onPress={pressHandler}> Add a new crop </Button>
 
-          <Button mode="contained" style={styles.button} color="blue" onPress={pressHandler}> Add a new crop </Button>
-          <Button mode="contained" style={styles.button} color="blue" onPress={signOut}> Sign out </Button>
+          <Button mode="contained"
+            style={{ width: "100%", height: 60, justifyContent: 'center', }}
+            labelStyle={{ color: "white", 
+            fontFamily: "bold", 
+            fontSize: 12 }}
+            color="#2F4553" onPress={signOut}> Sign out </Button>
 
         </View>
       </View>
@@ -71,11 +81,14 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    marginTop: 60
+    marginTop: 60,
+    fontFamily: "bold"
   },
   subtitle: {
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    color: "#2F4553", 
+    fontFamily: "regular",
   },
   item: {
     height: 60,

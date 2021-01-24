@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { useFonts, Montserrat_400Regular, Montserrat_700Bold, } from '@expo-google-fonts/montserrat';
 import { TextInput, Button } from 'react-native-paper';
 import * as firebase from 'firebase';
-import { color } from 'react-native-reanimated';
+
 
 export default function Login() {
 
