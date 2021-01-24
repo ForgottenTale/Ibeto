@@ -44,26 +44,32 @@ export default function DeviceConnect({ navigation }) {
       <View style={{ width: "90%", height: "100%" }}>
 
         <Text style={styles.subtitle}>Crops</Text>
-        <View >
+        <View style={styles.itemContainer}>
 
           <FlatList
             data={crops}
             renderItem={renderItem}
             keyExtractor={item => item.key}
           />
+          <View >
 
-          <Button
-            mode="contained"
-            style={{ width: "100%", height: 60, justifyContent: 'center', }}
-            labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-            color="#2F4553" onPress={pressHandler}> Add a new crop </Button>
+            <Button
+              mode="contained"
+              style={{ width: "100%", height: 60, justifyContent: 'center', }}
+              labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+              color="#2F4553" onPress={pressHandler}> Add a new crop </Button>
 
-          <Button mode="contained"
-            style={{ width: "100%", height: 60, justifyContent: 'center', }}
-            labelStyle={{ color: "white", 
-            fontFamily: "bold", 
-            fontSize: 12 }}
-            color="#2F4553" onPress={signOut}> Sign out </Button>
+            <Button mode="contained"
+              style={{
+                width: "100%", height: 60, justifyContent: 'center'
+              }}
+              labelStyle={{
+                color: "white",
+                fontFamily: "bold",
+                fontSize: 12
+              }}
+              color="#2F4553" onPress={signOut}> Sign out </Button>
+          </View >
 
         </View>
       </View>
@@ -74,28 +80,20 @@ export default function DeviceConnect({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
     position: "relative",
     height: "100%"
 
   },
-  title: {
-    marginTop: 60,
-    fontFamily: "bold"
-  },
+ 
   subtitle: {
     marginTop: 20,
     marginBottom: 20,
-    color: "#2F4553", 
+    color: "#2F4553",
     fontFamily: "regular",
   },
-  item: {
-    height: 60,
-    backgroundColor: "red",
-    marginBottom: 20,
-    justifyContent: 'center',
-  },
+
   itemName: {
     marginLeft: 20,
   },
@@ -103,9 +101,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 60,
     justifyContent: 'center',
-    // position:"absolute",
-    // top:0,
-    // right:0
+    marginBottom :20
+  
+  },
+  itemContainer:{
+    height:"90%",
+    justifyContent:"space-between"
   }
 
 
