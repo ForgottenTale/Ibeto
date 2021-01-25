@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Image } from 'react-native';
 
 import { Button } from 'react-native-paper';
 import * as firebase from 'firebase';
@@ -24,17 +24,21 @@ export default function DeviceConnect({ navigation }) {
   const renderItem = ({ item }) => {
 
     return (
-      <TouchableOpacity>
-        <LinearGradient
-          colors={['#EEFAFF', '#F8F8F8']}
-          style={styles.button}>
+      <View style={{flex: 1,
+        margin: 1,}}>
+        <TouchableOpacity>
+          <LinearGradient
+            colors={['#F3F3F3', '#F3F3F3']}
+            style={styles.button}>
 
-          <Text style={styles.itemName}>{item.title}</Text>
+            <Text style={styles.itemName}>{item.title}</Text>
+            <Image source={require("../assets/wheat.png")} style={styles.itemImage} />
 
-        </LinearGradient>
+          </LinearGradient>
 
 
-      </TouchableOpacity>)
+        </TouchableOpacity>
+      </View>)
   }
 
 
@@ -45,12 +49,16 @@ export default function DeviceConnect({ navigation }) {
 
         <Text style={styles.subtitle}>Crops</Text>
         <View style={styles.itemContainer}>
-
+          {/* <View style={styles.cropList}> */}
           <FlatList
+            numColumns={2}
             data={crops}
             renderItem={renderItem}
             keyExtractor={item => item.key}
+            style={{ flex: 1, }}
           />
+          {/* </View> */}
+
           <View >
 
             <Button
@@ -86,7 +94,7 @@ const styles = StyleSheet.create({
     height: "100%"
 
   },
- 
+
   subtitle: {
     marginTop: 20,
     marginBottom: 20,
@@ -96,17 +104,35 @@ const styles = StyleSheet.create({
 
   itemName: {
     marginLeft: 20,
+    marginTop: 20,
+    fontFamily: "regular",
+    fontSize: 12
   },
   button: {
-    width: "100%",
-    height: 60,
-    justifyContent: 'center',
-    marginBottom :20
-  
+    width: "90%",
+    height: 100,
+    marginBottom: 20,
+    flex: 1,
+    margin: 1,
+    borderRadius:10
+
   },
-  itemContainer:{
-    height:"90%",
-    justifyContent:"space-between"
+  itemContainer: {
+    height: "85%",
+    justifyContent: "space-between"
+  },
+  cropList: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: 'wrap',
+
+  },
+  itemImage: {
+    width: 45,
+    height: 45,
+    marginLeft: "auto",
+    marginRight: "auto"
   }
 
 

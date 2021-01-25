@@ -1,29 +1,32 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+import Loader from "./loader"
 import axios from 'axios';
 
 
 
 export default function DeviceConnect({ navigation }) {
 
+  const [data, setData] = useState({})
 
   const pressNavigate = () => {
-    navigation.navigate('DeviceData')
+    navigation.navigate('DeviceData', data)
     console.log("done")
   }
   const pressHandler = () => {
 
 
     var url = "http:/" + ipAddress + ":80/data";
-
+    url = "http:/192.168.31.58:80/data"
     axios.get(url).then(response => {
-      console.log(response.data);
+
+      setData(response.data)
+      console.log()
       setdeviceConnected(true);
     })
       .catch(error => {
-        console.error(error)
         setError(true)
       });
 
@@ -39,15 +42,20 @@ export default function DeviceConnect({ navigation }) {
   if (error) {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../assets/404.jpg')} style={styles.image}>
+        <View style={{
+          width: "90%", height: "100%", height: "95%",
+          justifyContent: "space-between"
+        }}>
+          <Image source={require('../assets/404.jpg')} style={styles.image} />
 
-        </ImageBackground>
 
-        <Button
-          mode="contained"
-          style={{ width: "100%", height: 60, justifyContent: 'center', }}
-          labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-          color="#2F4553" onPress={() => { setError(false) }}>Retry</Button>
+
+          <Button
+            mode="contained"
+            style={{ width: "100%", height: 60, justifyContent: 'center', }}
+            labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+            color="#2F4553" onPress={() => { setError(false) }}>Retry</Button>
+        </View>
       </View>
     )
   }
@@ -55,24 +63,29 @@ export default function DeviceConnect({ navigation }) {
   if (deviceConnected) {
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../assets/Connected.jpg')} style={styles.image}>
+        <View style={{
+          width: "90%", height: "100%", height: "95%",
+          justifyContent: "space-between"
+        }}>
+          <View style={styles.imageContainer}>
+            <Image source={require('../assets/Connected.jpg')} style={styles.image} />
 
-        </ImageBackground>
-        <Text style={{ marginTop: 20, marginBottom: 20 }}>Device Added</Text>
-        <Button
-          mode="contained"
-          style={{ width: "100%", height: 60, justifyContent: 'center', }}
-          labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-          color="#2F4553" onPress={pressHandler}> Add devices </Button>
 
+            <Text style={{ marginTop: 20, marginBottom: 20 }}>Device Added</Text>
+          </View>
+
+          <Button
+            mode="contained"
+            style={{ width: "100%", height: 60, justifyContent: 'center', }}
+            labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+            color="#2F4553" onPress={pressNavigate}> Next </Button>
+        </View>
       </View>
     )
   }
   else if (loader) {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator />
-      </View>
+      <Loader />
 
     )
   }
@@ -97,7 +110,7 @@ export default function DeviceConnect({ navigation }) {
               mode="contained"
               style={{ width: "100%", height: 60, justifyContent: 'center', }}
               labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-              color="#2F4553" onPress={pressNavigate}> Connect </Button>
+              color="#2F4553" onPress={pressHandler}> Connect </Button>
 
           </View>
         </View>
@@ -132,12 +145,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: 'center',
     justifyContent: 'center',
-
+    marginTop: "auto",
+    marginBottom: "auto"
 
   },
   itemContainer: {
     height: "80%",
     justifyContent: "space-between"
+  },
+  imageContainer: {
+    marginTop: "auto",
+    marginBottom: "auto",
+    alignItems: 'center',
   }
 
 

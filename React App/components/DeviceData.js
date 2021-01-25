@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image,ActivityIndicator } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { Button } from 'react-native-paper';
 import axios from 'axios';
+import Loader from './loader';
 
 
 export default function DeviceData({ navigation }) {
@@ -14,17 +15,25 @@ export default function DeviceData({ navigation }) {
     const [phosphate, setPhosphate] = useState(0);
     const [loader, setLoader] = useState(false);
 
+
+    useEffect(() => {
+        setPh(navigation.getParam('pH'))
+        setNitrate(navigation.getParam('Nitrate'))
+        setPhosphate(navigation.getParam('Phosphate'))
+
+    }, [])
+
     const pressHandler = () => {
         setLoader(true);
         var url = "http://192.168.31.58:80/data";
 
         axios.get(url).then(response => {
-     
+
             navigation.navigate('CropList');
             setLoader(false);
         })
             .catch(error => {
-               
+
                 setError(true)
                 setLoader(false);
             });
@@ -49,12 +58,10 @@ export default function DeviceData({ navigation }) {
     }
     else if (loader) {
         return (
-          <View style={styles.container}>
-            <ActivityIndicator />
-          </View>
-    
+            <Loader />
+
         )
-      }
+    }
     else {
         return (
             <View style={styles.container}>
@@ -62,7 +69,13 @@ export default function DeviceData({ navigation }) {
 
                     <Text style={styles.subtitle}>Recieved soil data</Text>
                     <View style={styles.itemContainer}>
-                        <View>
+                        <View style={
+                            {
+                               flexDirection:"row",
+                               flexWrap:"wrap",
+                               justifyContent:"space-between"
+                            }
+                        }>
                             <View style={styles.item}>
                                 <Text style={styles.itemName}>Ph</Text>
                                 <Text style={styles.itemValue}>{Ph}</Text>
@@ -110,21 +123,27 @@ const styles = StyleSheet.create({
 
     },
     item: {
-        width: "100%",
+        width: "45%",
         height: 60,
-        backgroundColor: "red",
+        backgroundColor: "#F3F3F3",
         marginBottom: 20,
         justifyContent: 'space-between',
         display: "flex",
         flexDirection: "row",
         alignItems: 'center',
+        borderRadius:10
 
     },
     itemName: {
         marginLeft: 20,
+        fontFamily:"bold",
+        fontSize:12
     },
     itemValue: {
         marginRight: 20,
+        fontFamily:"bold",
+        color:"green"
+        
     },
     image: {
         width: "100%",
@@ -137,10 +156,10 @@ const styles = StyleSheet.create({
         marginBottom: "auto"
 
     },
-    itemContainer:{
-        height:"85%",
-        justifyContent:"space-between"
-      }
+    itemContainer: {
+        height: "85%",
+        justifyContent: "space-between"
+    }
 
 
 
