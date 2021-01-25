@@ -5,15 +5,13 @@ import { Button } from 'react-native-paper';
 import * as firebase from 'firebase';
 import { useTheme } from './provider/context'
 import { LinearGradient } from 'expo-linear-gradient';
-import axios from 'axios';
-import Loader from "./loader";
+
 
 export default function DeviceConnect({ navigation }) {
 
   const crop = useTheme();
   const crops = crop.data
-  const [error, setError] = useState(false);
-  const [loader, setLoader] = useState(false);
+
 
   const pressHandler = () => {
     navigation.navigate('DeviceList')
@@ -26,7 +24,6 @@ export default function DeviceConnect({ navigation }) {
 
   const connectDevice = (item) => {
 
-    
     navigation.navigate('DeviceList',item)
   }
 
@@ -51,32 +48,7 @@ export default function DeviceConnect({ navigation }) {
         </TouchableOpacity>
       </View>)
   }
-  if (error) {
-    <View style={styles.container}>
-      <View style={{
-        width: "90%", height: "100%", height: "95%",
-        justifyContent: "space-between"
-      }}>
-        <Image source={require('../assets/404.jpg')} style={styles.image} />
 
-
-
-        <Button
-          mode="contained"
-          style={{ width: "100%", height: 60, justifyContent: 'center', }}
-          labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-          color="#2F4553" onPress={() => { setError(false) }}>Retry</Button>
-      </View>
-    </View>
-  }
-
-  else if (loader) {
-    return (
-      <Loader />
-
-    )
-  }
-  else {
     return (
       <View style={styles.container}>
         <View style={{ width: "90%", height: "100%" }}>
@@ -94,14 +66,7 @@ export default function DeviceConnect({ navigation }) {
             {/* </View> */}
 
             <View >
-
-              <Button
-                mode="contained"
-                style={{ width: "100%", height: 60, justifyContent: 'center', }}
-                labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-                color="#2F4553" onPress={pressHandler}> Add a new crop </Button>
-
-              <Button mode="contained"
+            <Button mode="contained"
                 style={{
                   width: "100%", height: 60, justifyContent: 'center'
                 }}
@@ -111,6 +76,14 @@ export default function DeviceConnect({ navigation }) {
                   fontSize: 12
                 }}
                 color="#2F4553" onPress={signOut}> Sign out </Button>
+
+              <Button
+                mode="contained"
+                style={{ width: "100%", height: 60, justifyContent: 'center', marginTop:20}}
+                labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+                color="#2F4553" onPress={pressHandler}> Add a new crop </Button>
+
+             
             </View >
 
           </View>
@@ -118,7 +91,7 @@ export default function DeviceConnect({ navigation }) {
       </View>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
   container: {

@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Button } from 'react-native-paper';
-
-
+import axios from 'axios';
+import Loader from "./loader"
 import { useTheme } from './provider/context';
 
 export default function DeviceList({ navigation }) {
@@ -11,62 +11,111 @@ export default function DeviceList({ navigation }) {
   const crops = navigation.getParam('devices');
 
   const [device, setDevice] = useState(false);
+  const [error, setError] = useState(false);
+  const [loader, setLoader] = useState(false);
 
-  // crops=  navigation.getParam('devices');
-useEffect(()=>{
-  if(crops==null){
-    setDevice(true);
-  }
-})
+  useEffect(() => {
+    if (crops == null) {
+      setDevice(true);
+    }
+  })
 
 
   const pressHandler = () => {
     navigation.navigate('DeviceConnect');
- 
+
+  }
+  const DeviceData = (item) => {
+
+    setLoader(true);
+    var url = "http:/" + item.ip + ":80/data";
+
+    axios.get(url).then(response => {
+      setLoader(false);
+      navigation.navigate('Data', response.data);
+    })
+      .catch(error => {
+        setError(true)
+        setLoader(false);
+   
+      });
   }
   const renderItem = ({ item }) => {
 
     return (
-      <TouchableOpacity>
-        <View style={styles.item}>
-          <Text style={styles.itemName}>{item.name}</Text>
-        </View>
+      <View style={{ flex: 1, margin: 1 }}>
 
-      </TouchableOpacity>)
+
+        <TouchableOpacity onPress={() => { DeviceData(item) }}>
+          <View style={styles.item}>
+            <Text style={styles.itemName}>{item.name}</Text>
+          </View>
+
+        </TouchableOpacity>
+      </View>)
   }
 
 
-
-  return (
-    <View style={styles.container}>
-      <View style={{ width: "90%", height: "100%" }}>
-
-        <Text style={styles.subtitle}>Devices Connected</Text>
-        <View style={styles.itemContainer}>
-          
-          {(device) ? <View style={styles.imageContainer}>
-            <Image source={require('../assets/device.jpg')} style={styles.image} />
-            <Text style={styles.subtitle}>No devices added</Text>
-          </View> : null}
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <View style={{
+          width: "90%", height: "100%", height: "95%",
+          justifyContent: "space-between"
+        }}>
+          <Image source={require('../assets/404.jpg')} style={styles.image} />
 
 
-          <FlatList
-            data={crops}
-            renderItem={renderItem}
-            keyExtractor={item => item.name}
-          />
 
-          <View>
-            <Button
-              mode="contained"
-              style={{ width: "100%", height: 60, justifyContent: 'center', }}
-              labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-              color="#2F4553" onPress={pressHandler}> Add devices </Button>
+          <Button
+            mode="contained"
+            style={{ width: "100%", height: 60, justifyContent: 'center', }}
+            labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+            color="#2F4553" onPress={() => { setError(false) }}>Retry</Button>
+        </View>
+      </View>
+    )
+  }
+  else if (loader) {
+    return (
+      <Loader />
+
+    )
+  }
+  else {
+    return (
+      <View style={styles.container}>
+        <View style={{ width: "90%", height: "100%" }}>
+
+          <Text style={styles.subtitle}>Devices Connected</Text>
+          <View style={styles.itemContainer}>
+
+            {(device) ? <View style={styles.imageContainer}>
+              <Image source={require('../assets/device.jpg')} style={styles.image} />
+              <Text style={styles.subtitle}>No devices added</Text>
+            </View> : null}
+
+
+            <FlatList
+              numColumns={2}
+              data={crops}
+              renderItem={renderItem}
+              keyExtractor={item => item.name}
+              style={{ flex: 1 }}
+            />
+
+            <View>
+              <Button
+                mode="contained"
+                style={{ width: "100%", height: 60, justifyContent: 'center', }}
+                labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+                color="#2F4553" onPress={pressHandler}> Add devices </Button>
+            </View>
           </View>
         </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -87,17 +136,23 @@ const styles = StyleSheet.create({
     fontFamily: "regular",
   },
   item: {
+    width: "100%",
+    margin: 1,
+    borderRadius: 10,
     height: 60,
-    backgroundColor: "red",
     marginBottom: 20,
     justifyContent: 'center',
+    backgroundColor: "#F3F3F3",
+    margin: 1,
   },
   itemName: {
     marginLeft: 20,
   },
   itemContainer: {
+    width: "100%",
     height: "85%",
     justifyContent: "space-between",
+
   },
   image: {
 

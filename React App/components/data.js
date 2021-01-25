@@ -6,7 +6,7 @@ import axios from 'axios';
 import Loader from './loader';
 
 
-export default function DeviceData({ navigation }) {
+export default function Data({ navigation }) {
 
 
     const [error, setError] = useState(false);
@@ -16,7 +16,6 @@ export default function DeviceData({ navigation }) {
     const [loader, setLoader] = useState(false);
 
 
-    var deviceData = {};
 
     useEffect(() => {
         setPh(navigation.getParam('pH'))
@@ -28,14 +27,12 @@ export default function DeviceData({ navigation }) {
     const pressHandler = () => {
         setLoader(true);
         var url = "http://192.168.31.58:80/data";
-        deviceData = {
-            ip: navigation.getParam('ip'),
-            id: navigation.getParam('name')
-        }
+       
 
         axios.get(url).then(response => {
-
-            navigation.navigate('CropList', deviceData);
+            setPh(response.data.pH)
+            setNitrate(response.data.Nitrate)
+            setPhosphate(response.data.Phosphate)
             setLoader(false);
         })
             .catch(error => {
@@ -101,7 +98,7 @@ export default function DeviceData({ navigation }) {
                             mode="contained"
                             style={{ width: "100%", height: 60, justifyContent: 'center', }}
                             labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-                            color="#2F4553" onPress={pressHandler}> Search for crops </Button>
+                            color="#2F4553" onPress={pressHandler}>Refresh</Button>
 
                     </View>
                 </View>

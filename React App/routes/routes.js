@@ -9,6 +9,8 @@ import CropData from '../components/CropData';
 
 import React from 'react';
 import {  Text } from 'react-native';
+import Data from '../components/data';
+
 
 const screens = {
     Dashboard: {
@@ -49,11 +51,13 @@ const screens = {
         navigationOptions: {
             headerTitle:  () => (<Text style={{ fontFamily: "bold" }}>Crop data</Text> )
         }
+    },
+    Data:{
+        screen: Data,
+        navigationOptions: {
+            headerTitle:  () => (<Text style={{ fontFamily: "bold" }}>Crop data</Text> )
+        }
     }
-
-
-
-
 
 }
 

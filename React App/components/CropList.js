@@ -25,9 +25,13 @@ export default function CropList({ navigation }) {
         predictedprice: "Rs 51/kg" ,
     }}
     ]
-
+    const pressHandler =(item)=>{
+        item.ip = navigation.getParam('ip');
+        item.id = navigation.getParam('id');
+        navigation.navigate('CropData', item);
+    }
     const renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => { navigation.navigate('CropData', item); }}>
+        <TouchableOpacity onPress={() => {  pressHandler(item) }}>
             <View style={styles.item}>
                 <Text style={styles.itemName}>{item.name}</Text>
                 <View>

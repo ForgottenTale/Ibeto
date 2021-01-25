@@ -10,21 +10,21 @@ export default function CropData({ navigation }) {
 
     var d = useTheme()
 
-    const pressHandler = () => {
-        var k = {
-            title: "Wheat",
-            key: '2',
-            devices: [{ name: "Device 1", ph: '0', nitrate: '0', phoshate: '0', key: '1' },
-            { name: "Device 1", ph: '0', nitrate: '0', phoshate: '0', key: '1' }]
-        }
-        d.Add(currentData => [...currentData, k]);
-        // console.log(k.title)
-        navigation.navigate('Dashboard')
-    }
+  
     const data = navigation.getParam('data');
     const name = navigation.getParam('name');
+    const device = navigation.getParam('id');
+    const ip = navigation.getParam('ip');
 
-
+    const pressHandler = () => {
+        var k = {
+            title: name,
+            key: '2',
+            devices: [{ name: device, ph: '0', nitrate: '0', phoshate: '0', key: '1',ip:ip }]
+        }
+        d.Add(currentData => [...currentData, k]);
+        navigation.navigate('Dashboard')
+    }
 
     return (
         <View style={styles.container}>

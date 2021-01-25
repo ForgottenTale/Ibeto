@@ -64,9 +64,9 @@ void handleData()
     {
         String payload;
         StaticJsonDocument<200> doc;
-        doc["pH"] = random(5, 6);
-        doc["Phosphate"] = random(5, 6);
-        doc["Nitrate"] = random(5, 6);
+        doc["pH"] = random(5, 7);
+        doc["Phosphate"] = random(4, 6);
+        doc["Nitrate"] = random(3, 6);
         serializeJson(doc, payload);
         server.send(200, "text/plain", payload);
         Serial.println("Message sent");

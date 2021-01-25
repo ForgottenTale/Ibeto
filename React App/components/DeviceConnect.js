@@ -19,17 +19,21 @@ export default function DeviceConnect({ navigation }) {
     setLoader(true);
 
     var url = "http:/" + ipAddress + ":80/data";
-    url = "http:/192.168.31.58:80/data"
-    axios.get(url).then(response => {
 
-      setData(response.data)
-      console.log()
+    axios.get(url).then(response => {
       setLoader(false);
+      response.data.ip = ipAddress,
+      response.data.name = "NodeMCU 1"
+      console.log(response.data)
+      setData(response.data)
+      console.log(response.data)
+      
       setdeviceConnected(true);
     })
       .catch(error => {
         setError(true)
         setLoader(false);
+        console.log(error)
       });
 
   }
@@ -62,7 +66,7 @@ export default function DeviceConnect({ navigation }) {
     )
   }
 
-  if (deviceConnected) {
+ else if (deviceConnected) {
     return (
       <View style={styles.container}>
         <View style={{
