@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Button } from 'react-native-paper';
 
@@ -8,21 +8,28 @@ import { useTheme } from './provider/context';
 
 export default function DeviceList({ navigation }) {
   const crop = useTheme();
-  const crops = {}
+  const crops = navigation.getParam('devices');
 
-  const [device, setDevice] = useState(true);
+  const [device, setDevice] = useState(false);
 
+  // crops=  navigation.getParam('devices');
+useEffect(()=>{
+  if(crops==null){
+    setDevice(true);
+  }
+})
 
 
   const pressHandler = () => {
     navigation.navigate('DeviceConnect');
+ 
   }
   const renderItem = ({ item }) => {
 
     return (
       <TouchableOpacity>
         <View style={styles.item}>
-          <Text style={styles.itemName}>{item.devices.name}</Text>
+          <Text style={styles.itemName}>{item.name}</Text>
         </View>
 
       </TouchableOpacity>)
@@ -46,7 +53,7 @@ export default function DeviceList({ navigation }) {
           <FlatList
             data={crops}
             renderItem={renderItem}
-            keyExtractor={item => item.key}
+            keyExtractor={item => item.name}
           />
 
           <View>

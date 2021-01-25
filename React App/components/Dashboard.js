@@ -1,16 +1,19 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Image } from 'react-native';
-
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Button } from 'react-native-paper';
 import * as firebase from 'firebase';
 import { useTheme } from './provider/context'
 import { LinearGradient } from 'expo-linear-gradient';
+import axios from 'axios';
+import Loader from "./loader";
 
 export default function DeviceConnect({ navigation }) {
 
   const crop = useTheme();
   const crops = crop.data
+  const [error, setError] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const pressHandler = () => {
     navigation.navigate('DeviceList')
@@ -21,12 +24,20 @@ export default function DeviceConnect({ navigation }) {
 
   }
 
+  const connectDevice = (item) => {
+
+    
+    navigation.navigate('DeviceList',item)
+  }
+
   const renderItem = ({ item }) => {
 
     return (
-      <View style={{flex: 1,
-        margin: 1,}}>
-        <TouchableOpacity>
+      <View style={{
+        flex: 1,
+        margin: 1,
+      }}>
+        <TouchableOpacity onPress={()=>{connectDevice(item)}}>
           <LinearGradient
             colors={['#F3F3F3', '#F3F3F3']}
             style={styles.button}>
@@ -40,49 +51,73 @@ export default function DeviceConnect({ navigation }) {
         </TouchableOpacity>
       </View>)
   }
-
-
-
-  return (
+  if (error) {
     <View style={styles.container}>
-      <View style={{ width: "90%", height: "100%" }}>
+      <View style={{
+        width: "90%", height: "100%", height: "95%",
+        justifyContent: "space-between"
+      }}>
+        <Image source={require('../assets/404.jpg')} style={styles.image} />
 
-        <Text style={styles.subtitle}>Crops</Text>
-        <View style={styles.itemContainer}>
-          {/* <View style={styles.cropList}> */}
-          <FlatList
-            numColumns={2}
-            data={crops}
-            renderItem={renderItem}
-            keyExtractor={item => item.key}
-            style={{ flex: 1, }}
-          />
-          {/* </View> */}
 
-          <View >
 
-            <Button
-              mode="contained"
-              style={{ width: "100%", height: 60, justifyContent: 'center', }}
-              labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
-              color="#2F4553" onPress={pressHandler}> Add a new crop </Button>
-
-            <Button mode="contained"
-              style={{
-                width: "100%", height: 60, justifyContent: 'center'
-              }}
-              labelStyle={{
-                color: "white",
-                fontFamily: "bold",
-                fontSize: 12
-              }}
-              color="#2F4553" onPress={signOut}> Sign out </Button>
-          </View >
-
-        </View>
+        <Button
+          mode="contained"
+          style={{ width: "100%", height: 60, justifyContent: 'center', }}
+          labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+          color="#2F4553" onPress={() => { setError(false) }}>Retry</Button>
       </View>
     </View>
-  );
+  }
+
+  else if (loader) {
+    return (
+      <Loader />
+
+    )
+  }
+  else {
+    return (
+      <View style={styles.container}>
+        <View style={{ width: "90%", height: "100%" }}>
+
+          <Text style={styles.subtitle}>Crops</Text>
+          <View style={styles.itemContainer}>
+            {/* <View style={styles.cropList}> */}
+            <FlatList
+              numColumns={2}
+              data={crops}
+              renderItem={renderItem}
+              keyExtractor={item => item.key}
+              style={{ flex: 1, }}
+            />
+            {/* </View> */}
+
+            <View >
+
+              <Button
+                mode="contained"
+                style={{ width: "100%", height: 60, justifyContent: 'center', }}
+                labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+                color="#2F4553" onPress={pressHandler}> Add a new crop </Button>
+
+              <Button mode="contained"
+                style={{
+                  width: "100%", height: 60, justifyContent: 'center'
+                }}
+                labelStyle={{
+                  color: "white",
+                  fontFamily: "bold",
+                  fontSize: 12
+                }}
+                color="#2F4553" onPress={signOut}> Sign out </Button>
+            </View >
+
+          </View>
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -109,12 +144,12 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   button: {
-    width: "90%",
+    width: "100%",
     height: 100,
     marginBottom: 20,
     flex: 1,
     margin: 1,
-    borderRadius:10
+    borderRadius: 10
 
   },
   itemContainer: {
@@ -133,7 +168,20 @@ const styles = StyleSheet.create({
     height: 45,
     marginLeft: "auto",
     marginRight: "auto"
-  }
+  },
+  image: {
+
+    width: 250,
+    height: 250,
+    marginLeft: "auto",
+    marginRight: "auto",
+    resizeMode: "contain",
+    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+
+
+  },
 
 
 

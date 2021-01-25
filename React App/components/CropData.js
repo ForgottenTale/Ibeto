@@ -1,20 +1,25 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import axios from 'axios';
+import { useTheme } from './provider/context';
 
 
 export default function CropData({ navigation }) {
 
 
-
+    var d = useTheme()
 
     const pressHandler = () => {
-
-        console.log("pressed")
-        // console.log(navigation.getParam('data'))
-
+        var k = {
+            title: "Wheat",
+            key: '2',
+            devices: [{ name: "Device 1", ph: '0', nitrate: '0', phoshate: '0', key: '1' },
+            { name: "Device 1", ph: '0', nitrate: '0', phoshate: '0', key: '1' }]
+        }
+        d.Add(currentData => [...currentData, k]);
+        // console.log(k.title)
+        navigation.navigate('Dashboard')
     }
     const data = navigation.getParam('data');
     const name = navigation.getParam('name');
