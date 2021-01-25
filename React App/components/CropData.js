@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     itemName: {
         fontFamily: "bold",
         color: "black",
-        fontSize: 12,
+        fontSize: 10,
         marginLeft: 20,
         marginTop: 20
     },

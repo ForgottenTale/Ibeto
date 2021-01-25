@@ -27,7 +27,7 @@ export default function CropList({ navigation }) {
     ]
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => { console.log(item.name); navigation.navigate('CropData', item); }}>
+        <TouchableOpacity onPress={() => { navigation.navigate('CropData', item); }}>
             <View style={styles.item}>
                 <Text style={styles.itemName}>{item.name}</Text>
                 <View>
