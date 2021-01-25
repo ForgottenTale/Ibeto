@@ -13,10 +13,10 @@ export default function DeviceConnect({ navigation }) {
 
   const pressNavigate = () => {
     navigation.navigate('DeviceData', data)
-    console.log("done")
+ 
   }
   const pressHandler = () => {
-
+    setLoader(true);
 
     var url = "http:/" + ipAddress + ":80/data";
     url = "http:/192.168.31.58:80/data"
@@ -24,10 +24,12 @@ export default function DeviceConnect({ navigation }) {
 
       setData(response.data)
       console.log()
+      setLoader(false);
       setdeviceConnected(true);
     })
       .catch(error => {
         setError(true)
+        setLoader(false);
       });
 
   }
