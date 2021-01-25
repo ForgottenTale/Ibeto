@@ -31,12 +31,12 @@ export default function CropList({ navigation }) {
             <View style={styles.item}>
                 <Text style={styles.itemName}>{item.name}</Text>
                 <View>
-                    <Text style={styles.itemName}>Current Price</Text>
-                    <Text style={styles.itemName}>{item.data.currentprice}</Text>
+                    <Text style={styles.itemPrice}>Current Price</Text>
+                    <Text style={styles.itemValue}>{item.data.currentprice}</Text>
                 </View>
                 <View>
-                    <Text style={styles.itemName}>Predicted Price</Text>
-                    <Text style={styles.itemName}>{item.data.predictedprice}</Text>
+                    <Text style={styles.itemPrice}>Predicted Price</Text>
+                    <Text style={styles.itemValue}>{item.data.predictedprice}</Text>
                 </View>
 
             </View>
@@ -83,20 +83,30 @@ const styles = StyleSheet.create({
     item: {
         width: "100%",
         height: 60,
-        backgroundColor: "red",
+        backgroundColor: "#F3F3F3",
         marginBottom: 20,
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         display: "flex",
         flexDirection: "row",
         alignItems: 'center',
+        borderRadius:10
 
     },
     itemName: {
-        marginLeft: 20,
+        fontFamily:"bold",
+        color:"black",
+        fontSize:12,
     },
     itemValue: {
-        marginRight: 20,
+        fontFamily:"bold",
+        fontSize:12,
+        color:"green",
     },
+    itemPrice:{
+        fontFamily:"regular",
+        color:"black",
+        fontSize:8
+    }
 
 
 

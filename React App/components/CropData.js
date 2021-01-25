@@ -7,7 +7,6 @@ import axios from 'axios';
 
 export default function CropData({ navigation }) {
 
-    // const data =[da]
 
 
 
@@ -20,33 +19,37 @@ export default function CropData({ navigation }) {
     const data = navigation.getParam('data');
     const name = navigation.getParam('name');
 
-    
+
 
     return (
         <View style={styles.container}>
             <View style={{ width: "90%", height: "100%" }}>
-            <Text style={styles.subtitle}>{name}</Text>
+                <Text style={styles.subtitle}>{name}</Text>
 
                 <View style={styles.dataContainer}>
+                    <View style={styles.itemContainer}>
+                        <View style={styles.item}>
+                            <Text style={styles.itemName}>Humidity</Text>
+                            <Text style={styles.itemValue}>{data.humidity}</Text>
 
-                    <View style={styles.item}>
-                        <Text style={styles.itemName}>Humidity</Text>
-                        <Text style={styles.itemName}>{data.humidity}</Text>
+                        </View>
+                        <View style={styles.item}>
+                            <Text style={styles.itemName}>Current Price</Text>
+                            <Text style={styles.itemValue}>{data.currentprice}</Text>
 
+                        </View>
+                        <View style={styles.item}>
+                            <Text style={styles.itemName}>Predicted Price</Text>
+                            <Text style={styles.itemValue}>{data.predictedprice}</Text>
+
+                        </View>
                     </View>
-                    <View style={styles.item}>
-                        <Text style={styles.itemName}>Current Price</Text>
-                        <Text style={styles.itemName}>{data.currentprice}</Text>
 
-                    </View>
-                    <View style={styles.item}>
-                        <Text style={styles.itemName}>Predicted Price</Text>
-                        <Text style={styles.itemName}>{data.predictedprice}</Text>
-
-                    </View>
-                    
-
-                    <Button mode="contained" style={{ width: "100%", height: 60, justifyContent: 'center', bottom: 0 }} color="blue" onPress={pressHandler}> Select </Button>
+                    <Button
+                        mode="contained"
+                        style={{ width: "100%", height: 60, justifyContent: 'center', }}
+                        labelStyle={{ color: "white", fontFamily: "bold", fontSize: 12 }}
+                        color="#2F4553" onPress={pressHandler}> Select </Button>
 
                 </View>
             </View>
@@ -67,30 +70,43 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         marginTop: 20,
-        marginBottom: 20
+        marginBottom: 20,
+        fontFamily: "regular",
     },
     item: {
         width: "45%",
-        height: 60,
-        backgroundColor: "red",
+        height: 100,
         marginBottom: 20,
-        justifyContent: 'space-around',
-        display: "flex",
-        flexDirection: "row",
-        alignItems: 'center',
+        borderRadius: 10,
+        backgroundColor: "#F3F3F3",
 
     },
-    itemName: {
-       
-    },
-    dataContainer:{
-        width: "100%", 
-        justifyContent: "space-between",
-        display : "flex",
-        flexDirection:"row",
+    itemContainer: {
+        flexDirection: "row",
         flexWrap: 'wrap',
-    }
-    
+        justifyContent: "space-between",
+    },
+    itemName: {
+        fontFamily: "bold",
+        color: "black",
+        fontSize: 12,
+        marginLeft: 20,
+        marginTop: 20
+    },
+    dataContainer: {
+        width: "100%",
+        height: "85%",
+        justifyContent: "space-between",
+
+    },
+    itemValue: {
+        fontFamily: "bold",
+        fontSize: 16,
+        color: "green",
+        marginLeft: 20,
+        marginTop: 10
+    },
+
 
 
 

@@ -7,40 +7,47 @@ import DeviceData from '../components/DeviceData';
 import CropList from '../components/CropList';
 import CropData from '../components/CropData';
 
+import React from 'react';
+import {  Text } from 'react-native';
+
 const screens = {
     Dashboard: {
-        screen: Dashboard
+        screen: Dashboard,
+        navigationOptions: {
+            headerTitle:  () => (<Text style={{ fontFamily: "bold" }}>Dashboard</Text> )
+        },
     },
 
     DeviceList: {
         screen: DeviceList,
         navigationOptions: {
-            title: "Devices",
-        }
+            headerTitle:  () => (<Text style={{ fontFamily: "bold" }}>Devices</Text> )
+        },
+       
     },
     DeviceConnect: {
         screen: DeviceConnect,
         navigationOptions: {
-            title: "Connect a new device"
+            headerTitle:  () => (<Text style={{ fontFamily: "bold" }}>Connect a new device</Text> )
         }
     },
     DeviceData: {
         screen: DeviceData,
         navigationOptions: {
-            title: "Devices data"
+            headerTitle:  () => (<Text style={{ fontFamily: "bold" }}>Device data</Text> )
         }
 
     },
     CropList:{
         screen: CropList,
         navigationOptions: {
-            title: "Suggested Crops"
+            headerTitle:  () => (<Text style={{ fontFamily: "bold" }}>Suggested Crops</Text> )
         }
     },
     CropData:{
         screen: CropData,
         navigationOptions: {
-            title: "Crop Data"
+            headerTitle:  () => (<Text style={{ fontFamily: "bold" }}>Crop data</Text> )
         }
     }
 
