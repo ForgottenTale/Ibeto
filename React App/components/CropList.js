@@ -8,21 +8,39 @@ export default function CropList({ navigation }) {
     const data = [
         { name: "Rice",
     data:{
-        humidity :"50%",
+        humidity :"100cm",
         ph: 7,
         phoshate : 8,
         nitrate : 10,
-        currentprice: "Rs 50/kg", 
-        predictedprice: "Rs 51/kg" ,
+        currentprice: "Rs 100 WPI", 
+        predictedprice: "Rs 162 WPI" ,
     }},
     { name: "Wheat", 
     data:{
-        humidity :"70%",
+        humidity :"100cm",
         ph: 6,
         phoshate : 8,
         nitrate : 10,
-        currentprice: "Rs 50/kg", 
-        predictedprice: "Rs 51/kg" ,
+        currentprice: "Rs 156 WPI", 
+        predictedprice: "Rs 110 WPI" ,
+    }},
+    { name: "Maize", 
+    data:{
+        humidity :"100cm",
+        ph: 6,
+        phoshate : 8,
+        nitrate : 10,
+        currentprice: "Rs 110 WPI", 
+        predictedprice: "Rs 112 WPI" ,
+    }},
+    { name: "Jute", 
+    data:{
+        humidity :"100cm",
+        ph: 6,
+        phoshate : 8,
+        nitrate : 10,
+        currentprice: "Rs 150 WPI", 
+        predictedprice: "Rs 161 WPI" ,
     }}
     ]
     const pressHandler =(item)=>{

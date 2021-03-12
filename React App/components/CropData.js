@@ -34,7 +34,7 @@ export default function CropData({ navigation }) {
                 <View style={styles.dataContainer}>
                     <View style={styles.itemContainer}>
                         <View style={styles.item}>
-                            <Text style={styles.itemName}>Humidity</Text>
+                            <Text style={styles.itemName}>Rainfall</Text>
                             <Text style={styles.itemValue}>{data.humidity}</Text>
 
                         </View>
@@ -46,6 +46,21 @@ export default function CropData({ navigation }) {
                         <View style={styles.item}>
                             <Text style={styles.itemName}>Predicted Price</Text>
                             <Text style={styles.itemValue}>{data.predictedprice}</Text>
+
+                        </View>
+                        <View style={styles.item}>
+                            <Text style={styles.itemName}>Ph</Text>
+                            <Text style={styles.itemValue}>{data.ph}</Text>
+
+                        </View>
+                        <View style={styles.item}>
+                            <Text style={styles.itemName}>Phosphorus</Text>
+                            <Text style={styles.itemValue}>{data.phoshate}</Text>
+
+                        </View>
+                        <View style={styles.item}>
+                            <Text style={styles.itemName}>Nitrogen</Text>
+                            <Text style={styles.itemValue}>{data.nitrate}</Text>
 
                         </View>
                     </View>
